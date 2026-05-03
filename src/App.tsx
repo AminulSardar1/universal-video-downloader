@@ -104,19 +104,11 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen text-white font-sans selection:bg-indigo-500 selection:text-white pb-12">
-      {/* Background elements moved to index.css radial gradients but let's add some extra floating glow */}
+    <div className="min-h-screen text-slate-50 font-sans selection:bg-blue-600 selection:text-white pb-12">
+      {/* Subtle Background Gradients */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none z-[-1]">
-        <motion.div 
-          animate={{ x: [0, 50, 0], y: [0, 20, 0], scale: [1, 1.1, 1] }}
-          transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute top-20 left-20 w-[500px] h-[500px] bg-indigo-600/5 blur-[150px] rounded-full" 
-        />
-        <motion.div 
-          animate={{ x: [0, -50, 0], y: [0, -20, 0], scale: [1.1, 1, 1.1] }}
-          transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute bottom-20 right-20 w-[600px] h-[600px] bg-pink-600/5 blur-[150px] rounded-full" 
-        />
+        <div className="absolute top-0 left-1/4 w-[1000px] h-[600px] bg-blue-600/5 blur-[120px] rounded-full -translate-x-1/2 -translate-y-1/2" />
+        <div className="absolute bottom-0 right-1/4 w-[800px] h-[500px] bg-blue-900/5 blur-[100px] rounded-full translate-x-1/2 translate-y-1/2" />
       </div>
 
       <AnimatePresence>
@@ -125,19 +117,19 @@ export default function App() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/95 backdrop-blur-2xl"
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/90 backdrop-blur-sm"
           >
             <motion.div 
-              initial={{ scale: 0.9, y: 30 }}
-              animate={{ scale: 1, y: 0 }}
-              exit={{ scale: 0.9, y: 30 }}
-              className="relative w-full max-w-5xl aspect-video bg-black shadow-2xl rounded-[40px] overflow-hidden border border-white/10"
+              initial={{ scale: 0.95, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.95, opacity: 0 }}
+              className="relative w-full max-w-5xl aspect-video bg-black shadow-2xl rounded-2xl overflow-hidden border border-white/10"
             >
               <button 
                 onClick={() => setActiveVideoUrl(null)}
-                className="absolute top-6 right-6 z-51 p-4 bg-white/5 hover:bg-white hover:text-indigo-900 rounded-3xl transition-all shadow-2xl backdrop-blur-md"
+                className="absolute top-6 right-6 z-51 p-3 bg-white/10 hover:bg-white/20 text-white rounded-full transition-all backdrop-blur-md"
               >
-                <X className="w-6 h-6" />
+                <X className="w-5 h-5" />
               </button>
               <video 
                 src={activeVideoUrl} 
@@ -155,36 +147,30 @@ export default function App() {
         {/* Navbar */}
         <header className="flex justify-between items-center mb-24">
           <motion.div 
-            initial={{ opacity: 0, x: -30 }}
-            animate={{ opacity: 1, x: 0 }}
-            className="flex items-center gap-4 group"
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="flex items-center gap-3"
           >
-            <div className="relative">
-              <motion.div 
-                animate={{ scale: [1, 1.2, 1], rotate: [0, 10, 0] }}
-                transition={{ duration: 4, repeat: Infinity }}
-                className="absolute -inset-3 bg-indigo-500 blur-xl opacity-30 group-hover:opacity-70 transition-opacity" 
-              />
-              <div className="relative bg-white p-3 rounded-3xl shadow-2xl">
-                <Zap className="w-7 h-7 text-indigo-600 fill-indigo-600" />
-              </div>
+            <div className="relative bg-blue-600 p-2.5 rounded-xl shadow-lg ring-1 ring-blue-400/20">
+              <Zap className="w-6 h-6 text-white fill-white" />
             </div>
             <div>
-              <h1 className="text-3xl font-black tracking-tighter italic leading-none text-white">VELO</h1>
-              <p className="text-[10px] font-black tracking-[0.4em] text-indigo-400 mt-1 uppercase opacity-60">High-Speed Grabber</p>
+              <h1 className="text-2xl font-bold tracking-tight text-white uppercase italic">Aminul</h1>
+              <p className="text-[9px] font-bold tracking-[0.3em] text-blue-400 uppercase opacity-70">Media Protocol</p>
             </div>
           </motion.div>
           
           <motion.nav 
-            initial={{ opacity: 0, y: -20 }}
+            initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
-            className="hidden lg:flex items-center gap-2 p-2 bg-white/5 rounded-3xl border border-white/10 backdrop-blur-xl"
+            transition={{ delay: 0.1 }}
+            className="hidden lg:flex items-center gap-1 p-1.5 bg-slate-900/50 rounded-full border border-white/5 backdrop-blur-md"
           >
-            {['Home', 'History', 'Partners', 'Support'].map((item) => (
+            {['Home', 'History', 'API Docs', 'Support'].map((item) => (
               <a 
                 key={item} 
                 href="#" 
-                className={`px-8 py-3 rounded-2xl text-[11px] font-black uppercase tracking-widest transition-all ${item === 'Home' ? 'bg-white text-indigo-950 shadow-2xl' : 'text-white/40 hover:text-white hover:bg-white/5'}`}
+                className={`px-6 py-2 rounded-full text-[11px] font-semibold uppercase tracking-widest transition-all ${item === 'Home' ? 'bg-white text-slate-900' : 'text-slate-400 hover:text-white'}`}
               >
                 {item}
               </a>
@@ -192,114 +178,109 @@ export default function App() {
           </motion.nav>
 
           <motion.div
-             initial={{ opacity: 0, x: 30 }}
-             animate={{ opacity: 1, x: 0 }}
+             initial={{ opacity: 0, y: -10 }}
+             animate={{ opacity: 1, y: 0 }}
+             transition={{ delay: 0.2 }}
           >
-            <button className="bg-indigo-600 hover:bg-indigo-500 text-white px-8 py-3 rounded-3xl font-black text-xs uppercase tracking-widest shadow-2xl flex items-center gap-3 transition-colors">
-              <Monitor className="w-4 h-4" /> APP
+            <button className="bg-slate-800 hover:bg-slate-700 text-white px-6 py-2.5 rounded-full font-bold text-[10px] uppercase tracking-widest flex items-center gap-2 border border-white/10 transition-colors">
+              <Monitor className="w-4 h-4" /> Dashboard
             </button>
           </motion.div>
         </header>
 
         {/* Hero Area */}
-        <div className="max-w-4xl mx-auto w-full text-center mb-24">
+        <div className="max-w-4xl mx-auto w-full text-center mb-20 px-4">
           <motion.div
-            initial={{ opacity: 0, y: 40 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
+            transition={{ duration: 0.6 }}
           >
-            <h2 className="text-6xl md:text-8xl font-black mb-8 tracking-tighter leading-[0.85] text-gradient">
-              Download Media <br />
-              <span className="text-white italic">At Lightspeed.</span>
+            <h2 className="text-4xl sm:text-6xl md:text-7xl font-bold mb-6 tracking-tight leading-tight text-white">
+              The Enterprise Standard <br />
+              <span className="text-blue-500">for Media Retrieval.</span>
             </h2>
-            <p className="text-slate-400 text-xl font-medium mb-16 max-w-xl mx-auto leading-relaxed border-l-2 border-white/5 pl-8 text-left italic">
-              Premium universal downloader for creators and enthusiasts. No limits. No ads. Just pure high-fidelity content grab.
+            <p className="text-slate-400 text-lg sm:text-xl font-medium mb-12 max-w-2xl mx-auto leading-relaxed">
+              Professional-grade media extraction infrastructure. Fast, secure, and reliable processing for all primary social platforms.
             </p>
           </motion.div>
           
           <motion.div 
-            initial={{ opacity: 0, scale: 0.98 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.2 }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1 }}
             className="relative"
           >
-            <form onSubmit={handleDownload} className="relative z-20 group">
-              <div className={`glass-card rounded-[40px] p-3 transition-all duration-700 premium-shadow ${loading ? 'scanning' : 'hover:border-white/20'}`}>
-                {loading && <div className="scanning-line" />}
-                <div className="flex flex-col md:flex-row items-stretch gap-3">
-                  <div className="flex-1 flex items-center px-8 min-h-[70px]">
-                    <LinkIcon className="w-6 h-6 text-indigo-400/30 mr-6" />
+            <form onSubmit={handleDownload} className="relative z-20">
+              <div className={`pro-card rounded-2xl p-2 sm:p-2.5 transition-shadow hover:pro-shadow ${loading ? 'opacity-80' : ''}`}>
+                <div className="flex flex-col sm:flex-row items-stretch gap-2">
+                  <div className="flex-1 flex items-center px-6 min-h-[56px]">
+                    <LinkIcon className="w-5 h-5 text-slate-500 mr-4 shrink-0" />
                     <input
                       type="text"
                       value={url}
                       onChange={(e) => setUrl(e.target.value)}
-                      placeholder="Paste link from TikTok, IG, FB, YT..."
-                      className="w-full bg-transparent border-none text-2xl focus:outline-none placeholder-white/10 text-white font-bold"
+                      placeholder="Enter a video link from TikTok, Instagram, YouTube..."
+                      className="w-full bg-transparent border-none text-base focus:outline-none placeholder-slate-600 text-white font-medium"
                     />
                   </div>
-                  <motion.button
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
+                  <button
                     type="submit"
                     disabled={loading}
-                    className="h-20 md:h-auto px-12 bg-white text-indigo-950 rounded-[30px] font-black text-xl shadow-[0_20px_40px_rgba(0,0,0,0.4)] hover:bg-indigo-50 transition-all flex items-center justify-center gap-4 disabled:opacity-50"
+                    className="h-14 sm:h-auto px-8 sm:px-10 bg-blue-600 hover:bg-blue-500 text-white rounded-xl font-bold text-sm uppercase tracking-widest transition-all flex items-center justify-center gap-2 disabled:opacity-50 shadow-lg shadow-blue-950/20"
                   >
                     {loading ? (
-                      <Loader2 className="animate-spin w-7 h-7" />
+                      <Loader2 className="animate-spin w-5 h-5" />
                     ) : (
                       <>
-                        FETCH <Download className="w-6 h-6" />
+                        Extract <Download className="w-4 h-4" />
                       </>
                     )}
-                  </motion.button>
+                  </button>
                 </div>
               </div>
             </form>
             
-            <div className="mt-12 flex flex-wrap justify-center gap-4">
+            <div className="mt-8 flex flex-wrap justify-center gap-3 opacity-60">
               {[
-                { icon: Youtube, label: 'YouTube', color: 'text-red-500' },
-                { icon: Facebook, label: 'Facebook', color: 'text-blue-500' },
-                { icon: Instagram, label: 'Instagram', color: 'text-pink-500' },
-                { icon: Zap, label: 'TikTok', color: 'text-cyan-500' }
+                { icon: Youtube, label: 'YouTube' },
+                { icon: Facebook, label: 'Facebook' },
+                { icon: Instagram, label: 'Instagram' },
+                { icon: Zap, label: 'TikTok' }
               ].map((p, i) => (
-                <motion.div 
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.5 + i * 0.1 }}
+                <div 
                   key={p.label} 
-                  className={`flex items-center gap-3 text-[11px] font-black uppercase tracking-[0.2em] bg-white/5 border border-white/5 px-6 py-2.5 rounded-full backdrop-blur-xl group cursor-default`}
+                  className={`flex items-center gap-2 text-[10px] font-semibold uppercase tracking-widest bg-slate-800/40 border border-white/5 px-4 py-2 rounded-lg`}
                 >
-                  <p.icon className={`w-4 h-4 ${p.color} transition-transform group-hover:scale-125`} /> 
-                  <span className="opacity-40 group-hover:opacity-100 transition-opacity">{p.label}</span>
-                </motion.div>
+                  <p.icon className="w-3.5 h-3.5" /> 
+                  <span>{p.label}</span>
+                </div>
               ))}
             </div>
           </motion.div>
         </div>
 
         {/* Main Interface Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-12 mb-32">
-          <div className="lg:col-span-3 space-y-12">
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 mb-24">
+          <div className="lg:col-span-3 space-y-8">
             <AnimatePresence mode="wait">
               {error && (
                 <motion.div
                   key="error"
-                  initial={{ opacity: 0, y: 30 }}
+                  initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, scale: 0.9 }}
-                  className="glass-card rounded-[50px] p-12 text-center relative border-red-500/20"
+                  exit={{ opacity: 0, scale: 0.98 }}
+                  className="pro-card rounded-2xl p-8 text-center border-red-500/20"
                 >
-                  <div className="w-24 h-24 bg-red-500/10 rounded-[40px] flex items-center justify-center mx-auto mb-8 ring-1 ring-red-500/20">
-                    <AlertCircle className="w-12 h-12 text-red-500" />
+                  <div className="w-16 h-16 bg-red-500/10 rounded-full flex items-center justify-center mx-auto mb-4 border border-red-500/20 text-red-500">
+                    <AlertCircle className="w-8 h-8" />
                   </div>
-                  <h3 className="text-3xl font-black text-red-100 mb-4 tracking-tight">Operation Failed</h3>
-                  <p className="text-slate-400 text-lg font-medium max-w-md mx-auto leading-relaxed">{error}</p>
+                  <h3 className="text-xl font-bold text-slate-100 mb-2">Extraction Error</h3>
+                  <p className="text-slate-400 text-sm max-w-sm mx-auto">{error}</p>
                   <button 
                     onClick={() => setError(null)}
-                    className="mt-10 px-8 py-3 bg-red-500/10 hover:bg-red-500/20 text-red-400 rounded-3xl text-xs font-black uppercase tracking-widest transition-all"
+                    className="mt-6 px-6 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-lg text-[10px] font-bold uppercase tracking-widest border border-white/10 transition-all"
                   >
-                    Try Again
+                    Return
                   </button>
                 </motion.div>
               )}
@@ -307,113 +288,95 @@ export default function App() {
               {result ? (
                 <motion.div
                   key="result"
-                  initial={{ opacity: 0, y: 60 }}
+                  initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className="bg-white rounded-[64px] p-10 md:p-14 shadow-[0_60px_120px_-30px_rgba(0,0,0,0.6)] text-slate-900 relative overflow-hidden"
+                  className="pro-card rounded-3xl p-8 md:p-12 shadow-2xl relative overflow-hidden"
                 >
-                  {/* Result Background Decoration */}
-                  <div className="absolute top-0 right-0 w-96 h-96 bg-indigo-600/5 blur-[100px] rounded-full -translate-y-1/2 translate-x-1/2" />
-                  
-                  <div className="flex flex-col sm:flex-row justify-between items-center gap-8 mb-16 relative">
-                    <div className="flex items-center gap-4 px-8 py-3 bg-indigo-600 text-white rounded-full text-xs font-black uppercase tracking-[0.3em] shadow-2xl shadow-indigo-600/40">
-                      <CheckCircle2 className="w-5 h-5" /> READY FOR CAPTURE
+                  <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-10">
+                    <div className="flex items-center gap-2 px-4 py-1.5 bg-emerald-500/10 text-emerald-500 rounded-full text-[10px] font-bold uppercase tracking-widest border border-emerald-500/20">
+                      <CheckCircle2 className="w-3.5 h-3.5" /> System Validated
                     </div>
-                    <div className="flex items-center gap-3">
-                       <p className="text-[10px] font-black text-slate-300 uppercase tracking-widest">TRANSACTION</p>
-                       <p className="font-mono text-xs font-black bg-slate-50 px-4 py-2 rounded-2xl border border-slate-100 text-indigo-600">
-                         {Math.random().toString(36).substring(2, 10).toUpperCase()}
-                       </p>
+                    <div className="text-[10px] font-mono text-slate-500 bg-slate-800/50 px-3 py-1.5 rounded-lg border border-white/5">
+                      REF: {Math.random().toString(36).substring(2, 8).toUpperCase()}
                     </div>
                   </div>
 
-                  <div className="flex flex-col xl:flex-row gap-14 mb-16 relative">
-                    <div className="xl:w-80 aspect-video xl:aspect-square bg-slate-50 rounded-[48px] overflow-hidden relative group shrink-0 border-8 border-slate-50 shadow-2xl">
+                  <div className="flex flex-col md:flex-row gap-10 mb-10">
+                    <div className="md:w-64 aspect-video md:aspect-square bg-slate-800 rounded-2xl overflow-hidden relative group shrink-0 shadow-lg border border-white/5">
                       {result.thumbnail ? (
-                        <img src={result.thumbnail} alt="Preview" className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110" />
+                        <img src={result.thumbnail} alt="Preview" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
                       ) : (
-                        <div className="w-full h-full flex items-center justify-center text-slate-200 bg-slate-100">
-                          <Play className="w-20 h-20 fill-current" />
+                        <div className="w-full h-full flex items-center justify-center text-slate-700">
+                          <Play className="w-12 h-12 fill-current" />
                         </div>
                       )}
-                      <div className="absolute inset-0 bg-gradient-to-t from-indigo-900/40 via-transparent flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                         <div className="w-20 h-20 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center shadow-2xl">
-                           <Play className="w-8 h-8 text-white fill-current translate-x-1" />
+                      <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                         <div className="w-14 h-14 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center shadow-2xl text-white">
+                           <Play className="w-6 h-6 fill-current translate-x-0.5" />
                          </div>
                       </div>
                     </div>
                     
-                    <div className="flex flex-col justify-center gap-8">
-                      <div className="space-y-4">
-                        <p className="text-indigo-600 font-black text-xs uppercase tracking-[0.4em] italic mb-2">SOURCE VERIFIED</p>
-                        <h3 className="text-4xl md:text-5xl font-black text-slate-800 leading-[1] tracking-tighter">
+                    <div className="flex flex-col justify-center">
+                      <div className="mb-6">
+                        <p className="text-blue-400 font-bold text-[10px] uppercase tracking-widest mb-1">Video Resource</p>
+                        <h3 className="text-2xl sm:text-3xl font-bold text-white leading-tight tracking-tight">
                           {result.title}
                         </h3>
                       </div>
-                      <div className="flex flex-wrap gap-4">
-                         <span className="px-5 py-2.5 bg-slate-100 rounded-2xl text-[10px] font-black uppercase tracking-widest text-slate-500">FORMAT: MP4</span>
-                         <span className="px-5 py-2.5 bg-slate-100 rounded-2xl text-[10px] font-black uppercase tracking-widest text-slate-500">ENCRYPTION: SSL</span>
-                         <span className="px-5 py-2.5 bg-indigo-50 rounded-2xl text-[10px] font-black uppercase tracking-widest text-indigo-600">STATE: ACTIVE</span>
+                      <div className="flex flex-wrap gap-2">
+                         <span className="px-3 py-1 bg-slate-800 rounded-lg text-[9px] font-semibold text-slate-400 border border-white/5">ENCODING: MP4</span>
+                         <span className="px-3 py-1 bg-slate-800 rounded-lg text-[9px] font-semibold text-slate-400 border border-white/5">PROTECTION: SSL</span>
                       </div>
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6 relative">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     {result.high && (
-                      <motion.div className="flex gap-4 group/btn h-32">
-                        <motion.button
-                          whileHover={{ y: -5 }}
-                          whileTap={{ scale: 0.98 }}
+                      <div className="flex gap-2">
+                        <button
                           onClick={() => triggerDownload(result.high, 'High')}
-                          className="flex-1 px-10 bg-slate-900 text-white rounded-[32px] flex flex-col items-center justify-center shadow-2xl hover:bg-black transition-all border-b-8 border-indigo-600/50"
+                          className="flex-1 px-8 py-5 bg-blue-600 hover:bg-blue-500 text-white rounded-xl flex flex-col items-center justify-center shadow-lg transition-all group"
                         >
-                          <span className="font-black text-3xl tracking-tighter italic">ULTRA HD</span>
-                          <span className="text-[10px] font-black opacity-40 mt-1 uppercase tracking-[0.3em]">Pure Fidelity Output</span>
-                        </motion.button>
-                        <motion.button
-                          whileHover={{ scale: 1.1, rotate: 5 }}
-                          whileTap={{ scale: 0.9 }}
+                          <span className="font-bold text-lg">Download High-Res</span>
+                          <span className="text-[10px] font-medium opacity-70 mt-0.5 uppercase tracking-widest">Highest Quality Available</span>
+                        </button>
+                        <button
                           onClick={() => setActiveVideoUrl(result.high)}
-                          className="w-32 bg-indigo-50 text-indigo-600 rounded-[32px] flex items-center justify-center hover:bg-indigo-600 hover:text-white transition-all shadow-xl group-hover/btn:shadow-indigo-600/20"
+                          className="w-16 bg-slate-800 text-white rounded-xl flex items-center justify-center hover:bg-slate-700 transition-all border border-white/5"
                         >
-                          <Play className="w-10 h-10 fill-current" />
-                        </motion.button>
-                      </motion.div>
+                          <Play className="w-6 h-6 fill-current" />
+                        </button>
+                      </div>
                     )}
                     {result.low && (
-                      <motion.div className="flex gap-4 group/btn h-32">
-                        <motion.button
-                          whileHover={{ y: -5 }}
-                          whileTap={{ scale: 0.98 }}
+                      <div className="flex gap-2">
+                        <button
                           onClick={() => triggerDownload(result.low, 'Low')}
-                          className="flex-1 px-10 bg-slate-100 rounded-[32px] flex flex-col items-center justify-center text-slate-800 hover:bg-slate-200 transition-all border-b-8 border-slate-300"
+                          className="flex-1 px-8 py-5 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-xl flex flex-col items-center justify-center border border-white/10 transition-all"
                         >
-                          <span className="font-black text-3xl tracking-tighter italic">DATA SAVER</span>
-                          <span className="text-[10px] font-black opacity-40 mt-1 uppercase tracking-[0.3em]">Optimized For Web</span>
-                        </motion.button>
-                        <motion.button
-                          whileHover={{ scale: 1.1, rotate: -5 }}
-                          whileTap={{ scale: 0.9 }}
+                          <span className="font-bold text-lg">Standard Def</span>
+                          <span className="text-[10px] font-medium opacity-50 mt-0.5 uppercase tracking-widest">Optimized for Storage</span>
+                        </button>
+                        <button
                           onClick={() => setActiveVideoUrl(result.low)}
-                          className="w-32 bg-slate-800 text-white rounded-[32px] flex items-center justify-center hover:bg-black transition-all shadow-xl"
+                          className="w-16 bg-slate-800 text-white rounded-xl flex items-center justify-center hover:bg-slate-700 transition-all border border-white/5"
                         >
-                          <Play className="w-10 h-10 fill-current" />
-                        </motion.button>
-                      </motion.div>
+                          <Play className="w-6 h-6 fill-current" />
+                        </button>
+                      </div>
                     )}
                   </div>
                 </motion.div>
               ) : !loading && (
-                <div className="h-full min-h-[600px] glass-card rounded-[80px] flex flex-col items-center justify-center text-white/5 space-y-12 border-dashed border-4">
-                  <motion.div 
-                    animate={{ y: [0, -20, 0] }}
-                    transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-                    className="p-16 bg-white/5 rounded-[60px] shadow-[0_40px_80px_rgba(0,0,0,0.5)] border border-white/5"
-                  >
-                    <Download className="w-32 h-32 opacity-10" />
-                  </motion.div>
-                  <div className="text-center">
-                    <p className="font-black tracking-[0.6em] text-lg uppercase italic opacity-20">SYSTEM IDLE</p>
-                    <p className="text-sm opacity-10 mt-4 font-medium max-w-xs mx-auto">Velo protocol is active and awaiting media resource initialization.</p>
+                <div className="pro-card rounded-[40px] flex flex-col items-center justify-center min-h-[500px] border-dashed text-slate-800">
+                  <div className="relative mb-8">
+                    <div className="absolute -inset-4 bg-blue-500/10 blur-2xl rounded-full" />
+                    <Download className="w-16 h-16 relative opacity-20" />
+                  </div>
+                  <div className="text-center px-6">
+                    <p className="font-bold tracking-[0.2em] text-xs uppercase opacity-40 mb-2">Waiting for input</p>
+                    <p className="text-slate-500/60 font-medium text-sm max-w-xs mx-auto">Please enter a valid media resource identifier to initiate the extraction protocol.</p>
                   </div>
                 </div>
               )}
@@ -421,112 +384,90 @@ export default function App() {
           </div>
 
           {/* Side Bento Area */}
-          <div className="space-y-12">
+          <div className="space-y-8">
             {/* Global Activity */}
-            <div className="glass-card rounded-[50px] p-10 premium-shadow">
-              <h4 className="text-2xl font-black mb-12 flex items-center gap-4">
-                <span className="w-4 h-4 bg-indigo-500 rounded-full shadow-[0_0_20px_#6366f1] animate-pulse"></span>
-                NETWORK
+            <div className="pro-card rounded-3xl p-8">
+              <h4 className="text-sm font-bold mb-8 flex items-center gap-3 text-slate-300">
+                <span className="w-2 h-2 bg-emerald-500 rounded-full shadow-[0_0_10px_#10b981]"></span>
+                Live Activity
               </h4>
-              <div className="space-y-10">
+              <div className="space-y-6">
                 {[
-                  { tag: 'TT', name: 'velocity_edit.mp4', platform: 'TikTok' },
-                  { tag: 'IG', name: 'aesthetic_shots.mov', platform: 'Instagram' },
-                  { tag: 'YT', name: 'podcast_clip.mkv', platform: 'YouTube' },
-                  { tag: 'FB', name: 'documentary.mp4', platform: 'Facebook' }
+                  { tag: 'TT', name: 'aminul_media.mp4', platform: 'TikTok' },
+                  { tag: 'IG', name: 'aesthetic.mov', platform: 'Instagram' },
+                  { tag: 'YT', name: 'podcast.mkv', platform: 'YouTube' }
                 ].map((item, idx) => (
-                  <motion.div 
-                    initial={{ opacity: 0, x: 30 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.7 + idx * 0.1 }}
-                    key={idx} 
-                    className="flex items-center gap-6 group"
-                  >
-                    <div className="w-14 h-14 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-sm font-black group-hover:bg-indigo-600 group-hover:text-white transition-all shadow-2xl italic">
+                  <div key={idx} className="flex items-center gap-4 group">
+                    <div className="w-12 h-12 rounded-xl bg-slate-800 border border-white/5 flex items-center justify-center text-[10px] font-bold text-slate-400 group-hover:bg-blue-600 group-hover:text-white transition-all">
                       {item.tag}
                     </div>
                     <div className="flex-1 overflow-hidden">
-                      <p className="truncate text-base font-black italic opacity-80 group-hover:text-indigo-400 transition-colors">
+                      <p className="truncate text-xs font-bold text-slate-300 group-hover:text-blue-400 transition-colors">
                         {item.name}
                       </p>
-                      <p className="text-[10px] opacity-30 font-black uppercase tracking-[0.2em] mt-2 italic">{item.platform} &bull; COMPLETED</p>
+                      <p className="text-[9px] text-slate-600 font-bold uppercase tracking-widest mt-1">{item.platform}</p>
                     </div>
-                  </motion.div>
+                  </div>
                 ))}
               </div>
             </div>
 
-            {/* Admin Hub */}
-             <motion.div 
-              initial={{ opacity: 0, y: 40 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4 }}
-              className="glass-card rounded-[50px] p-10 relative group"
-            >
-              <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500" />
-              <h4 className="text-2xl font-black mb-10 flex items-center gap-4">
-                <Globe className="w-6 h-6 text-indigo-400" />
-                CONCIERGE
+            {/* Support */}
+             <div className="pro-card rounded-3xl p-8 relative overflow-hidden group">
+              <div className="absolute top-0 right-0 p-4 opacity-5">
+                <Globe className="w-12 h-12" />
+              </div>
+              <h4 className="text-sm font-bold mb-8 text-slate-300 uppercase tracking-widest">
+                Support
               </h4>
-              <div className="space-y-5">
+              <div className="space-y-3">
                 {[
-                  { href: "https://www.facebook.com/100071880593545", icon: Facebook, label: "FACEBOOK", sub: "FOUNDER ACCESS", color: "bg-[#1877F2]" },
-                  { href: "https://t.me/Aminulsordar", icon: Send, label: "TELEGRAM", sub: "GLOBAL NODE", color: "bg-[#0088cc]" },
-                  { href: "https://wa.me/8801704407109", icon: MessageCircle, label: "WHATSAPP", sub: "INSTANT LINE", color: "bg-[#25D366]" }
+                  { href: "https://www.facebook.com/100071880593545", icon: Facebook, label: "Facebook", color: "bg-[#1877F2]" },
+                  { href: "https://t.me/Aminulsordar", icon: Send, label: "Telegram", color: "bg-[#0088cc]" },
+                  { href: "https://wa.me/8801704407109", icon: MessageCircle, label: "WhatsApp", color: "bg-[#25D366]" }
                 ].map((item, i) => (
-                  <motion.a
+                  <a
                     key={i}
-                    whileHover={{ x: 10, backgroundColor: "rgba(255,255,255,0.05)" }}
-                    whileTap={{ scale: 0.98 }}
                     href={item.href}
                     target="_blank"
                     rel="noreferrer"
-                    className="flex items-center gap-6 p-5 rounded-[32px] transition-all group border border-white/5"
+                    className="flex items-center gap-4 p-3.5 rounded-xl transition-all border border-white/5 hover:bg-slate-800/80 group"
                   >
-                    <div className={`w-14 h-14 ${item.color} rounded-2xl flex items-center justify-center shadow-2xl group-hover:rotate-12 transition-transform shrink-0`}>
-                      <item.icon className="w-7 h-7 fill-current text-white" />
+                    <div className={`w-10 h-10 ${item.color} rounded-lg flex items-center justify-center shadow-lg group-hover:scale-105 transition-transform`}>
+                      <item.icon className="w-5 h-5 fill-current text-white" />
                     </div>
-                    <div className="flex-1 overflow-hidden">
-                      <p className="text-base font-black tracking-tighter italic">{item.label}</p>
-                      <p className="text-[10px] opacity-30 font-black tracking-[0.3em] uppercase truncate mt-1">{item.sub}</p>
-                    </div>
-                  </motion.a>
+                    <p className="text-xs font-bold text-slate-300">{item.label}</p>
+                  </a>
                 ))}
               </div>
-            </motion.div>
+            </div>
 
-            {/* Performance Stat */}
-            <div className="bg-indigo-600 rounded-[50px] p-14 text-center shadow-[0_40px_100px_-20px_rgba(79,70,229,0.5)] relative overflow-hidden group border border-white/20">
-              <div className="absolute top-0 right-0 -translate-y-1/2 translate-x-1/2 w-64 h-64 bg-white/10 blur-[80px] rounded-full group-hover:scale-150 transition-transform duration-1000" />
-              <p className="text-[11px] font-black text-indigo-200 uppercase tracking-[0.6em] mb-6 italic opacity-80">Aggregate Load</p>
-              <div className="text-7xl font-black mb-4 tracking-tighter leading-none italic">1.2M+</div>
-              <p className="text-sm font-black text-white/50 tracking-widest uppercase italic">Files Processed</p>
+            {/* Stats */}
+            <div className="bg-blue-600 rounded-3xl p-10 text-center shadow-xl relative overflow-hidden">
+              <div className="absolute -top-10 -right-10 w-32 h-32 bg-white/10 blur-[40px] rounded-full" />
+              <p className="text-[10px] font-bold text-blue-200 uppercase tracking-[0.2em] mb-3">Total Volume</p>
+              <div className="text-4xl font-black text-white mb-2 tracking-tight">1.2M+</div>
+              <p className="text-[10px] font-bold text-blue-200/60 uppercase tracking-widest">Global Downloads</p>
             </div>
           </div>
         </div>
 
         {/* Brand Footer */}
-        <footer className="mt-auto py-24 border-t border-white/5 flex flex-col items-center gap-16">
-          <div className="flex flex-wrap justify-center gap-12 md:gap-24 opacity-20 text-[11px] font-black tracking-[0.4em] grayscale hover:grayscale-0 hover:opacity-100 transition-all duration-1000 cursor-default">
-            <div className="flex items-center gap-4 hover:scale-110 transition-transform"><Youtube className="w-6 h-6" /> YOUTUBE</div>
-            <div className="flex items-center gap-4 hover:scale-110 transition-transform"><Zap className="w-6 h-6" /> TIKTOK</div>
-            <div className="flex items-center gap-4 hover:scale-110 transition-transform"><Facebook className="w-6 h-6" /> FACEBOOK</div>
-            <div className="flex items-center gap-4 hover:scale-110 transition-transform"><Instagram className="w-6 h-6" /> INSTAGRAM</div>
+        <footer className="mt-auto py-16 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-8">
+          <div className="flex flex-col items-center md:items-start gap-2">
+            <p className="text-[11px] text-slate-500 font-bold uppercase tracking-[0.2em] italic">
+              Aminul Protocol &bull; v4.2.0-STABLE
+            </p>
+            <p className="text-[10px] text-slate-600 font-bold uppercase tracking-[0.1em]">
+              &copy; {new Date().getFullYear()} Aminul Infrastructure Group.
+            </p>
           </div>
           
-          <div className="flex flex-col items-center gap-8">
-            <div className="flex items-center gap-4 filter drop-shadow-[0_0_10px_rgba(99,102,241,0.3)]">
-              <div className="w-2 h-2 bg-indigo-500 rounded-full animate-ping" />
-              <p className="text-[11px] text-indigo-400 font-black tracking-[0.5em] uppercase italic">VELO ENGINE v4.2.0 ACTIVE</p>
-            </div>
-            <div className="text-center space-y-2">
-              <p className="text-sm text-white/10 font-black tracking-[0.4em] uppercase">
-                &copy; 2026 VELO MEDIA INFRASTRUCTURE &bull; SYNCED
-              </p>
-              <p className="text-[10px] text-white/5 font-bold uppercase tracking-widest leading-relaxed">
-                Design by Aminul &bull; Built with Advanced Liquid Glass &bull; All Rights Reserved
-              </p>
-            </div>
+          <div className="flex items-center gap-8 opacity-40 hover:opacity-100 transition-opacity">
+            <Youtube className="w-5 h-5 cursor-pointer" />
+            <Zap className="w-5 h-5 cursor-pointer" />
+            <Facebook className="w-5 h-5 cursor-pointer" />
+            <Instagram className="w-5 h-5 cursor-pointer" />
           </div>
         </footer>
       </div>
